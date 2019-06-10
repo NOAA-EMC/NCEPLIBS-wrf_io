@@ -73,6 +73,8 @@ all:
 io_only:  libwrfio_nf.a
 
 #### IO_NETCDF section ####
+install:   libwrfio_nf.a
+	/bin/bash ./install.sh
 
 libwrfio_nf.a:   $(NCOBJS) $(CODE)
 		/bin/rm -f $@
