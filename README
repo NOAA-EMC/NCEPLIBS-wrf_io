@@ -14,4 +14,4 @@ need editing to specify it's location in the way NCO prefers.  Devlopment
 hardwired paths and environment loading are assumed unacceptable.
 The  module is suppled with $NCEPLIBS pathing
 
-
+V0.1
