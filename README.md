@@ -1,17 +1,21 @@
-Lightweight WRF-IO API library for NCEP UNIFIED POST (UPP)
+Lightweight WRF-IO API library for Unified Post Processor (UPP)
+---------------------------------------------------------------
 
-Build instructions
+## Build instructions
 
-cd to v1.1.1/src  
-load Intel compiler (done in make.sh)
+load Intel or GNU compiler
 load NetCDF (3.x or 4.x)
-run make.sh
 
-The libraries and .mod files will be installed in v1.1.1/lib/intel
+```
+prefix=/path/to/wrfio
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=<prefix> ..
+```
 
-The module to load this is in ../modulefiles/wrfio/v1.1.1 and will
-need editing to specify it's location in the way NCO prefers.  Devlopment
-hardwired paths and environment loading are assumed unacceptable.
-The  module is suppled with $NCEPLIBS pathing
+The libraries and .mod files will be installed in `<prefix>`
 
-
+To use this library in the application:
+```
+find_package(wrfio)
+cmake -DCMAKE_PREFIX_PATH=<prefix> ..
+```
