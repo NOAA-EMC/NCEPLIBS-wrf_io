@@ -1,12 +1,18 @@
-list(APPEND definitions WRFIO_NCD_LARGE_FILE_SUPPORT NO_M4)
+list(APPEND definitions
+  WRFIO_NCD_LARGE_FILE_SUPPORT
+  NO_M4)
 if(NetCDF_VERSION VERSION_GREATER_EQUAL 4)
-  list(APPEND definitions USE_NETCDF4_FEATURES)
+  list(APPEND definitions
+    USE_NETCDF4_FEATURES)
 endif()
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
-  set(CMAKE_Fortran_FLAGS "-g -fpp -free -xHOST -traceback -FR")
+  set(CMAKE_Fortran_FLAGS "-fpp -g -traceback -fp-model source -ftz -assume byterecl -convert big_endian -heap-arrays -nostdinc")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3 -w")
+  set(CMAKE_Fortran_FLAGS_DEBUG "-O0")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
-  set(CMAKE_Fortran_FLAGS "-g -fbacktrace -funroll-loops -ffree-line-length-none -cpp -fconvert=big-endian -frecord-marker=4")
+  set(CMAKE_Fortran_FLAGS "-cpp -g -fbacktrace -funroll-loops -ffree-line-length-none -fconvert=big-endian -frecord-marker=4")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(CMAKE_Fortran_FLAGS_DEBUG "-ggdb -Wall")
 endif()
 
