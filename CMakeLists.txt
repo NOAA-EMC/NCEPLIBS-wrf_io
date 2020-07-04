@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 file(STRINGS "VERSION" pVersion)
 
 project(
-  wrfio
+  wrf_io
   VERSION ${pVersion}
   LANGUAGES Fortran)
 
