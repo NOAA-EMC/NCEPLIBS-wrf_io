@@ -1,0 +1,4 @@
+[submodule "CMakeModules"]
+	path = CMakeModules
+	url = https://github.com/NOAA-EMC/CMakeModules
+	branch = develop
