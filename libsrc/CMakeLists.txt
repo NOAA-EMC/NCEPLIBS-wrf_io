@@ -7,13 +7,17 @@ if(NetCDF_VERSION VERSION_GREATER_EQUAL 4)
 endif()
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
-  set(CMAKE_Fortran_FLAGS "-fpp -g -traceback -fp-model source -ftz -assume byterecl -convert big_endian -heap-arrays -nostdinc")
+  set(CMAKE_Fortran_FLAGS "-fpp -g -traceback -fp-model source -ftz -assume byterecl -convert big_endian -heap-arrays -nostdinc ${CMAKE_Fortran_FLAGS}")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3 -w")
   set(CMAKE_Fortran_FLAGS_DEBUG "-O0")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
-  set(CMAKE_Fortran_FLAGS "-cpp -g -fbacktrace -funroll-loops -ffree-line-length-none -fconvert=big-endian -frecord-marker=4")
+  set(CMAKE_Fortran_FLAGS "-cpp -g -fbacktrace -funroll-loops -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 ${CMAKE_Fortran_FLAGS}")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(CMAKE_Fortran_FLAGS_DEBUG "-ggdb -Wall")
+endif()
+
+if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 10)
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch")
 endif()
 
 set(fortran_src
