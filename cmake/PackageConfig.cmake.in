@@ -11,6 +11,8 @@ if(@OPENMP@)
   find_dependency(OpenMP COMPONENTS Fortran)
 endif()
 
+find_dependency(NetCDF COMPONENTS Fortran)
+
 check_required_components("@PROJECT_NAME@")
 
 get_target_property(location @PROJECT_NAME@::@PROJECT_NAME@ LOCATION)
