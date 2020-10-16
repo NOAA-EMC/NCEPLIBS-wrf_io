@@ -1,6 +1,6 @@
 # This is the main CMake file for NCEPLIBS-wrf_io.
 #
-# Rahul Mahajan
+# 
 cmake_minimum_required(VERSION 3.15)
 
 file(STRINGS "VERSION" pVersion)
