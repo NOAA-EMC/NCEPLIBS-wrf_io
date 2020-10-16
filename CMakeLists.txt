@@ -1,3 +1,6 @@
+# This is the main CMake file for NCEPLIBS-wrf_io.
+#
+# Rahul Mahajan
 cmake_minimum_required(VERSION 3.15)
 
 file(STRINGS "VERSION" pVersion)
@@ -33,3 +36,10 @@ if(OPENMP)
 endif()
 
 add_subdirectory(libsrc)
+
+# Determine whether or not to generate documentation.
+option(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
+if(ENABLE_DOCS)
+  find_package(Doxygen REQUIRED)
+endif()
+add_subdirectory(docs)  
