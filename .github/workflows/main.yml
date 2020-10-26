@@ -11,7 +11,11 @@ jobs:
       with: 
         path: sp
 
-    - name: build_sp
+    - name: Installs
+      run: |
+        sudo apt-get install doxygen graphviz wget gfortran libjpeg-dev libz-dev libnetcdf-dev
+
+    - name: build_wrf_io
       env: 
         FC: gfortran-9
         CC: gcc-9
