@@ -4,6 +4,9 @@ The NCEPLIBS-wrf_io library was supplied by the WRF team at NCAR to
 satisfy the binding needs for ncep_post. This is part of the
 [NCEPLIBS](https://github.com/NOAA-EMC/NCEPLIBS) project.
 
+For complete documentation see
+https://noaa-emc.github.io/NCEPLIBS-wrf_io/.
+
 ## Authors
 
 NCEP/EMC developers.
