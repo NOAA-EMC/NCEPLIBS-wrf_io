@@ -6,14 +6,11 @@ cmake_minimum_required(VERSION 3.15)
 # Get the version from the VERSION file.
 file(STRINGS "VERSION" pVersion)
 
-# This provides cmake_print_variables() function for debugging.
-include(CMakePrintHelpers)
-
 # Initialize project.
 project(wrf_io VERSION ${pVersion} LANGUAGES Fortran)
 
 # Add custom CMake Modules.
-SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/"
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/"
   CACHE INTERNAL "Location of our custom CMake modules.")
 
 # User build options.
@@ -32,10 +29,7 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
 endif()
 
 # Find netCDF.
-include(FindNetCDF)
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
-cmake_print_variables(NETCDF_LIBRARIES NETCDF_INCLUDE_DIRS)
-include_directories("${NETCDF_INCLUDE_DIRS}")
 
 # Find OpenMP if desired.
 if(OPENMP)
