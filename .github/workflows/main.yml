@@ -13,7 +13,7 @@ jobs:
 
     - name: Installs
       run: |
-        sudo apt-get install doxygen graphviz wget gfortran libjpeg-dev libz-dev libnetcdf-dev
+        sudo apt-get install doxygen graphviz libnetcdf-dev libnetcdff-dev
 
     - name: build_wrf_io
       env: 
