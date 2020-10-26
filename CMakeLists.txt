@@ -10,8 +10,7 @@ file(STRINGS "VERSION" pVersion)
 project(wrf_io VERSION ${pVersion} LANGUAGES Fortran)
 
 # Add custom CMake Modules.
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/"
-  CACHE INTERNAL "Location of our custom CMake modules.")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # User build options.
 option(OPENMP "Enable OpenMP threading" OFF)
