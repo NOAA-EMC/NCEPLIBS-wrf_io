@@ -1,4 +1,4 @@
-name: with OPENMP
+name: build
 on: [push, pull_request]
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
         FC: gfortran-9
         CC: gcc-9
       run: |
-        which ncdump
+        find . -name netcdf.h -print
         cd sp
         mkdir build 
         cd build
