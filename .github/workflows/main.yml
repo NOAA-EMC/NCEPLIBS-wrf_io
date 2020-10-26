@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: checkout-sp
+    - name: checkout-wrf_io
       uses: actions/checkout@v2
       with: 
-        path: sp
+        path: wrf_io
 
     - name: Installs
       run: |
@@ -22,7 +22,7 @@ jobs:
       run: |
         set -x
         sudo find / -name netcdf.h -print
-        cd sp
+        cd wrf_io
         mkdir build 
         cd build
         cmake ..
