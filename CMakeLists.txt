@@ -12,13 +12,13 @@ include(CMakePrintHelpers)
 # Initialize project.
 project(wrf_io VERSION ${pVersion} LANGUAGES Fortran)
 
-#Add custom CMake Module
+# Add custom CMake Modules.
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/"
   CACHE INTERNAL "Location of our custom CMake modules.")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/Modules")
-
+# User build options.
 option(OPENMP "Enable OpenMP threading" OFF)
+option(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 
 include(GNUInstallDirs)
 
@@ -37,6 +37,7 @@ find_package(NetCDF REQUIRED COMPONENTS Fortran)
 cmake_print_variables(NETCDF_LIBRARIES NETCDF_INCLUDE_DIRS)
 include_directories("${NETCDF_INCLUDE_DIRS}")
 
+# Find OpenMP if desired.
 if(OPENMP)
   find_package(OpenMP REQUIRED COMPONENTS Fortran)
 endif()
@@ -44,7 +45,6 @@ endif()
 add_subdirectory(libsrc)
 
 # Determine whether or not to generate documentation.
-option(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 if(ENABLE_DOCS)
   find_package(Doxygen REQUIRED)
 endif()
