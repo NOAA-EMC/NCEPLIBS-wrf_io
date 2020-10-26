@@ -1,4 +1,8 @@
-# Lightweight WRF-IO API library for Unified Post Processor (UPP)
+# NCEPLIBS-wrf_io
+
+This is a lightweight WRF-IO API library for Unified Post Processor
+(UPP). It is based on code copied from
+https://github.com/wrf-model/WRF/tree/master/external/io_netcdf.
 
 The NCEPLIBS-wrf_io library was supplied by the WRF team at NCAR to
 satisfy the binding needs for ncep_post. This is part of the
@@ -9,7 +13,7 @@ https://noaa-emc.github.io/NCEPLIBS-wrf_io/.
 
 ## Authors
 
-NCEP/EMC developers.
+Jacques Middlecoff
 
 Code Manager: George Vandenberghe
 
