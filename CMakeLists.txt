@@ -33,11 +33,9 @@ endif()
 
 # Find netCDF.
 include(FindNetCDF)
-#find_package (NetCDF REQUIRED COMPONENTS C)
-find_package(NetCDF REQUIRED)
+find_package(NetCDF REQUIRED COMPONENTS Fortran)
 cmake_print_variables(NETCDF_LIBRARIES NETCDF_INCLUDE_DIRS)
 include_directories("${NETCDF_INCLUDE_DIRS}")
-find_package(NetCDF REQUIRED COMPONENTS Fortran)
 
 if(OPENMP)
   find_package(OpenMP REQUIRED COMPONENTS Fortran)
