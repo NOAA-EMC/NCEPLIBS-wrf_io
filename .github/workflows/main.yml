@@ -21,7 +21,6 @@ jobs:
         CC: gcc-9
       run: |
         set -x
-        sudo find / -name netcdf.h -print
         cd wrf_io
         mkdir build 
         cd build
