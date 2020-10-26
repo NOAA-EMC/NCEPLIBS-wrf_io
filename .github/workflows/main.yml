@@ -1,0 +1,25 @@
+name: with OPENMP
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: checkout-sp
+      uses: actions/checkout@v2
+      with: 
+        path: sp
+
+    - name: build_sp
+      env: 
+        FC: gfortran-9
+        CC: gcc-9
+      run: |
+        cd sp
+        mkdir build 
+        cd build
+        cmake ..
+        make -j2
+        make test
+

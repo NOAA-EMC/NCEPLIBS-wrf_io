@@ -10,6 +10,10 @@ NCEP/EMC developers.
 
 Code Manager: George Vandenberghe
 
+## Prerequisites
+
+This package requires the netCDF C library.
+
 ## Build instructions
 
 load Intel or GNU compiler
