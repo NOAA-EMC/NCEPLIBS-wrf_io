@@ -1,3 +1,8 @@
+!! @file
+!> WRF NetCDF I/O
+!> @author Jacques Middlecoff 
+!> @date October 6, 2000
+
 !*------------------------------------------------------------------------------
 !*  Standard Disclaimer
 !*
@@ -25,12 +30,6 @@
 !*  the modification.  If significant modifications or enhancements
 !*  are made to this software, the SMS Development team
 !*  (sms-info@fsl.noaa.gov) should be notified.
-!*
-!*----------------------------------------------------------------------------
-!*
-!*  WRF NetCDF I/O
-!   Author:  Jacques Middlecoff jacquesm@fsl.noaa.gov
-!*  Date:    October 6, 2000
 !*
 !*----------------------------------------------------------------------------
 

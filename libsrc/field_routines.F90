@@ -1,3 +1,8 @@
+!! @file
+!> WRF NetCDF I/O
+!> @author Jacques Middlecoff 
+!> @date October 6, 2000
+  
 !*------------------------------------------------------------------------------
 !*  Standard Disclaimer
 !*
@@ -27,12 +32,7 @@
 !*  (sms-info@fsl.noaa.gov) should be notified.
 !*
 !*----------------------------------------------------------------------------
-!*
-!*  WRF NetCDF I/O
-!   Author:  Jacques Middlecoff jacquesm@fsl.noaa.gov
-!*  Date:    October 6, 2000
-!*
-!*----------------------------------------------------------------------------
+
 subroutine ext_ncd_RealFieldIO(IO,NCID,VarID,VStart,VCount,Data,Status)
   use wrf_data
   use ext_ncd_support_routines
