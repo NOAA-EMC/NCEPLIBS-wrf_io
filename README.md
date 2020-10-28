@@ -1,8 +1,8 @@
 # NCEPLIBS-wrf_io
 
 This is a lightweight WRF-IO API library for Unified Post Processor
-(UPP). It reads wrf forecasts (WRF state plus diagnostics) and writes
-GRIB and GRIB2 products. It is based on code copied from
+(UPP). It reads wrf forecasts (WRF state plus diagnostics). It is
+based on code copied from
 https://github.com/wrf-model/WRF/tree/master/external/io_netcdf.
 
 The NCEPLIBS-wrf_io library was supplied by the WRF team at NCAR to
