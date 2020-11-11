@@ -773,31 +773,31 @@ subroutine Transpose(IO,MemoryOrder,di, Field,l1,l2,m1,m2,n1,n2 &
     case ('xzy')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(i,k,j))
-#include "transpose.code"
+#include "transpose.F90"
     case ('xyz','xsz','xez','ysz','yez','xy','xs','xe','ys','ye','z','c','0')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(i,j,k))
-#include "transpose.code"
+#include "transpose.F90"
     case ('yxz')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(j,i,k))
-#include "transpose.code"
+#include "transpose.F90"
     case ('zxy')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(k,i,j))
-#include "transpose.code"
+#include "transpose.F90"
     case ('yzx')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(j,k,i))
-#include "transpose.code"
+#include "transpose.F90"
     case ('zyx')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(k,j,i))
-#include "transpose.code"
+#include "transpose.F90"
     case ('yx')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(j,i,k))
-#include "transpose.code"
+#include "transpose.F90"
   end select
   return
 end subroutine Transpose
@@ -959,31 +959,31 @@ subroutine TransposeToR4(IO,MemoryOrder,di, Field,l1,l2,m1,m2,n1,n2 &
     case ('xzy')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(i,k,j))
-#include "transpose.code"
+#include "transpose.F90"
     case ('xyz','xsz','xez','ysz','yez','xy','xs','xe','ys','ye','z','c','0')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(i,j,k))
-#include "transpose.code"
+#include "transpose.F90"
     case ('yxz')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(j,i,k))
-#include "transpose.code"
+#include "transpose.F90"
     case ('zxy')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(k,i,j))
-#include "transpose.code"
+#include "transpose.F90"
     case ('yzx')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(j,k,i))
-#include "transpose.code"
+#include "transpose.F90"
     case ('zyx')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(k,j,i))
-#include "transpose.code"
+#include "transpose.F90"
     case ('yx')
 #undef  DFIELD
 #define DFIELD XField(1:di,XDEX(j,i,k))
-#include "transpose.code"
+#include "transpose.F90"
   end select
   return
 end subroutine TransposeToR4
@@ -1776,7 +1776,7 @@ subroutine ext_ncd_get_dom_ti_real(DataHandle,Element,Data,Count,OutCount,Status
 #define NF_TYPE NF_FLOAT
 #define NF_ROUTINE NF_GET_ATT_REAL 
 #define COPY   Data(1:min(Len,Count)) = Buffer(1:min(Len,Count))
-#include "ext_ncd_get_dom_ti.code"
+#include "ext_ncd_get_dom_ti.F90"
 end subroutine ext_ncd_get_dom_ti_real
 
 subroutine ext_ncd_get_dom_ti_integer(DataHandle,Element,Data,Count,OutCount,Status)
@@ -1792,7 +1792,7 @@ subroutine ext_ncd_get_dom_ti_integer(DataHandle,Element,Data,Count,OutCount,Sta
 #define NF_TYPE NF_INT
 #define NF_ROUTINE NF_GET_ATT_INT
 #define COPY   Data(1:min(Len,Count)) = Buffer(1:min(Len,Count))
-#include "ext_ncd_get_dom_ti.code"
+#include "ext_ncd_get_dom_ti.F90"
 end subroutine ext_ncd_get_dom_ti_integer
 
 subroutine ext_ncd_get_dom_ti_double(DataHandle,Element,Data,Count,OutCount,Status)
@@ -1808,7 +1808,7 @@ subroutine ext_ncd_get_dom_ti_double(DataHandle,Element,Data,Count,OutCount,Stat
 #define NF_TYPE NF_DOUBLE
 #define NF_ROUTINE NF_GET_ATT_DOUBLE
 #define COPY   Data(1:min(Len,Count)) = Buffer(1:min(Len,Count))
-#include "ext_ncd_get_dom_ti.code"
+#include "ext_ncd_get_dom_ti.F90"
 end subroutine ext_ncd_get_dom_ti_double
 
 subroutine ext_ncd_get_dom_ti_logical(DataHandle,Element,Data,Count,OutCount,Status)
@@ -1824,7 +1824,7 @@ subroutine ext_ncd_get_dom_ti_logical(DataHandle,Element,Data,Count,OutCount,Sta
 #define NF_TYPE NF_INT
 #define NF_ROUTINE NF_GET_ATT_INT
 #define COPY   Data(1:min(Len,Count)) = Buffer(1:min(Len,Count))==1
-#include "ext_ncd_get_dom_ti.code"
+#include "ext_ncd_get_dom_ti.F90"
 end subroutine ext_ncd_get_dom_ti_logical
 
 subroutine ext_ncd_get_dom_ti_char(DataHandle,Element,Data,Status)
@@ -1841,7 +1841,7 @@ subroutine ext_ncd_get_dom_ti_char(DataHandle,Element,Data,Status)
 #define TYPE_BUFFER
 #define NF_TYPE NF_CHAR
 #define CHAR_TYPE
-#include "ext_ncd_get_dom_ti.code"
+#include "ext_ncd_get_dom_ti.F90"
 #undef CHAR_TYPE
 end subroutine ext_ncd_get_dom_ti_char
 
@@ -1857,7 +1857,7 @@ subroutine ext_ncd_put_dom_ti_real(DataHandle,Element,Data,Count,Status)
 #define TYPE_COUNT integer,intent(in) :: Count
 #define NF_ROUTINE NF_PUT_ATT_REAL
 #define ARGS NF_FLOAT,Count,Data
-#include "ext_ncd_put_dom_ti.code"
+#include "ext_ncd_put_dom_ti.F90"
 end subroutine ext_ncd_put_dom_ti_real
 
 subroutine ext_ncd_put_dom_ti_integer(DataHandle,Element,Data,Count,Status)
@@ -1872,7 +1872,7 @@ subroutine ext_ncd_put_dom_ti_integer(DataHandle,Element,Data,Count,Status)
 #define TYPE_COUNT integer,intent(in) :: Count
 #define NF_ROUTINE NF_PUT_ATT_INT
 #define ARGS NF_INT,Count,Data
-#include "ext_ncd_put_dom_ti.code"
+#include "ext_ncd_put_dom_ti.F90"
 end subroutine ext_ncd_put_dom_ti_integer
 
 subroutine ext_ncd_put_dom_ti_double(DataHandle,Element,Data,Count,Status)
@@ -1887,7 +1887,7 @@ subroutine ext_ncd_put_dom_ti_double(DataHandle,Element,Data,Count,Status)
 #define TYPE_COUNT integer,intent(in) :: Count
 #define NF_ROUTINE NF_PUT_ATT_DOUBLE
 #define ARGS NF_DOUBLE,Count,Data
-#include "ext_ncd_put_dom_ti.code"
+#include "ext_ncd_put_dom_ti.F90"
 end subroutine ext_ncd_put_dom_ti_double
 
 subroutine ext_ncd_put_dom_ti_logical(DataHandle,Element,Data,Count,Status)
@@ -1902,7 +1902,7 @@ subroutine ext_ncd_put_dom_ti_logical(DataHandle,Element,Data,Count,Status)
 #define NF_ROUTINE NF_PUT_ATT_INT
 #define ARGS NF_INT,Count,Buffer
 #define LOG
-#include "ext_ncd_put_dom_ti.code"
+#include "ext_ncd_put_dom_ti.F90"
 end subroutine ext_ncd_put_dom_ti_logical
 
 subroutine ext_ncd_put_dom_ti_char(DataHandle,Element,Data,Status)
@@ -1917,7 +1917,7 @@ subroutine ext_ncd_put_dom_ti_char(DataHandle,Element,Data,Status)
 #define TYPE_COUNT integer,parameter :: Count=1
 #define NF_ROUTINE NF_PUT_ATT_TEXT
 #define ARGS len_trim(Data),Data
-#include "ext_ncd_put_dom_ti.code"
+#include "ext_ncd_put_dom_ti.F90"
 end subroutine ext_ncd_put_dom_ti_char
 
 subroutine ext_ncd_put_var_ti_real(DataHandle,Element,Var,Data,Count,Status)
@@ -1932,7 +1932,7 @@ subroutine ext_ncd_put_var_ti_real(DataHandle,Element,Var,Data,Count,Status)
 #define TYPE_COUNT integer ,intent(in) :: Count
 #define NF_ROUTINE NF_PUT_ATT_REAL
 #define ARGS NF_FLOAT,Count,Data
-#include "ext_ncd_put_var_ti.code"
+#include "ext_ncd_put_var_ti.F90"
 end subroutine ext_ncd_put_var_ti_real
 
 subroutine ext_ncd_put_var_td_real(DataHandle,Element,DateStr,Var,Data,Count,Status)
@@ -1951,7 +1951,7 @@ subroutine ext_ncd_put_var_td_real(DataHandle,Element,DateStr,Var,Data,Count,Sta
 #define NF_TYPE NF_FLOAT
 #define LENGTH Count
 #define ARG 
-#include "ext_ncd_put_var_td.code"
+#include "ext_ncd_put_var_td.F90"
 end subroutine ext_ncd_put_var_td_real
 
 subroutine ext_ncd_put_var_ti_double(DataHandle,Element,Var,Data,Count,Status)
@@ -1966,7 +1966,7 @@ subroutine ext_ncd_put_var_ti_double(DataHandle,Element,Var,Data,Count,Status)
 #define TYPE_COUNT integer ,intent(in) :: Count
 #define NF_ROUTINE NF_PUT_ATT_DOUBLE
 #define ARGS NF_DOUBLE,Count,Data
-#include "ext_ncd_put_var_ti.code"
+#include "ext_ncd_put_var_ti.F90"
 end subroutine ext_ncd_put_var_ti_double
 
 subroutine ext_ncd_put_var_td_double(DataHandle,Element,DateStr,Var,Data,Count,Status)
@@ -1985,7 +1985,7 @@ subroutine ext_ncd_put_var_td_double(DataHandle,Element,DateStr,Var,Data,Count,S
 #define NF_TYPE NF_DOUBLE
 #define LENGTH Count
 #define ARG 
-#include "ext_ncd_put_var_td.code"
+#include "ext_ncd_put_var_td.F90"
 end subroutine ext_ncd_put_var_td_double
 
 subroutine ext_ncd_put_var_ti_integer(DataHandle,Element,Var,Data,Count,Status)
@@ -2000,7 +2000,7 @@ subroutine ext_ncd_put_var_ti_integer(DataHandle,Element,Var,Data,Count,Status)
 #define TYPE_COUNT integer ,intent(in) :: Count
 #define NF_ROUTINE NF_PUT_ATT_INT
 #define ARGS NF_INT,Count,Data 
-#include "ext_ncd_put_var_ti.code"
+#include "ext_ncd_put_var_ti.F90"
 end subroutine ext_ncd_put_var_ti_integer
 
 subroutine ext_ncd_put_var_td_integer(DataHandle,Element,DateStr,Var,Data,Count,Status)
@@ -2019,7 +2019,7 @@ subroutine ext_ncd_put_var_td_integer(DataHandle,Element,DateStr,Var,Data,Count,
 #define NF_TYPE NF_INT
 #define LENGTH Count
 #define ARG 
-#include "ext_ncd_put_var_td.code"
+#include "ext_ncd_put_var_td.F90"
 end subroutine ext_ncd_put_var_td_integer
 
 subroutine ext_ncd_put_var_ti_logical(DataHandle,Element,Var,Data,Count,Status)
@@ -2034,7 +2034,7 @@ subroutine ext_ncd_put_var_ti_logical(DataHandle,Element,Var,Data,Count,Status)
 #define NF_ROUTINE NF_PUT_ATT_INT
 #define LOG
 #define ARGS NF_INT,Count,Buffer
-#include "ext_ncd_put_var_ti.code"
+#include "ext_ncd_put_var_ti.F90"
 end subroutine ext_ncd_put_var_ti_logical
 
 subroutine ext_ncd_put_var_td_logical(DataHandle,Element,DateStr,Var,Data,Count,Status)
@@ -2053,7 +2053,7 @@ subroutine ext_ncd_put_var_td_logical(DataHandle,Element,DateStr,Var,Data,Count,
 #define LOG
 #define LENGTH Count
 #define ARG 
-#include "ext_ncd_put_var_td.code"
+#include "ext_ncd_put_var_td.F90"
 end subroutine ext_ncd_put_var_td_logical
 
 subroutine ext_ncd_put_var_ti_char(DataHandle,Element,Var,Data,Status)
@@ -2069,7 +2069,7 @@ subroutine ext_ncd_put_var_ti_char(DataHandle,Element,Var,Data,Status)
 #define NF_ROUTINE NF_PUT_ATT_TEXT
 #define ARGS len_trim(Data),trim(Data)
 #define CHAR_TYPE
-#include "ext_ncd_put_var_ti.code"
+#include "ext_ncd_put_var_ti.F90"
 #undef CHAR_TYPE
 end subroutine ext_ncd_put_var_ti_char
 
@@ -2088,7 +2088,7 @@ subroutine ext_ncd_put_var_td_char(DataHandle,Element,DateStr,Var,Data,Status)
 #define NF_ROUTINE NF_PUT_VARA_TEXT
 #define NF_TYPE NF_CHAR
 #define LENGTH len(Data)
-#include "ext_ncd_put_var_td.code"
+#include "ext_ncd_put_var_td.F90"
 end subroutine ext_ncd_put_var_td_char
 
 subroutine ext_ncd_get_var_ti_real(DataHandle,Element,Var,Data,Count,OutCount,Status)
@@ -2108,7 +2108,7 @@ subroutine ext_ncd_get_var_ti_real(DataHandle,Element,Var,Data,Count,OutCount,St
 #define NF_TYPE NF_FLOAT
 #define NF_ROUTINE NF_GET_ATT_REAL
 #define COPY   Data(1:min(XLen,Count)) = Buffer(1:min(XLen,Count))
-#include "ext_ncd_get_var_ti.code"
+#include "ext_ncd_get_var_ti.F90"
 end subroutine ext_ncd_get_var_ti_real
 
 subroutine ext_ncd_get_var_td_real(DataHandle,Element,DateStr,Var,Data,Count,OutCount,Status)
@@ -2130,7 +2130,7 @@ subroutine ext_ncd_get_var_td_real(DataHandle,Element,DateStr,Var,Data,Count,Out
 #define NF_ROUTINE NF_GET_VARA_REAL
 #define LENGTH min(Count,Len1)
 #define COPY   Data(1:min(Len1,Count)) = Buffer(1:min(Len1,Count))
-#include "ext_ncd_get_var_td.code"
+#include "ext_ncd_get_var_td.F90"
 end subroutine ext_ncd_get_var_td_real
 
 subroutine ext_ncd_get_var_ti_double(DataHandle,Element,Var,Data,Count,OutCount,Status)
@@ -2150,7 +2150,7 @@ subroutine ext_ncd_get_var_ti_double(DataHandle,Element,Var,Data,Count,OutCount,
 #define NF_TYPE NF_DOUBLE
 #define NF_ROUTINE NF_GET_ATT_DOUBLE
 #define COPY   Data(1:min(XLen,Count)) = Buffer(1:min(XLen,Count))
-#include "ext_ncd_get_var_ti.code"
+#include "ext_ncd_get_var_ti.F90"
 end subroutine ext_ncd_get_var_ti_double
 
 subroutine ext_ncd_get_var_td_double(DataHandle,Element,DateStr,Var,Data,Count,OutCount,Status)
@@ -2172,7 +2172,7 @@ subroutine ext_ncd_get_var_td_double(DataHandle,Element,DateStr,Var,Data,Count,O
 #define NF_ROUTINE NF_GET_VARA_DOUBLE
 #define LENGTH min(Count,Len1)
 #define COPY   Data(1:min(Len1,Count)) = Buffer(1:min(Len1,Count))
-#include "ext_ncd_get_var_td.code"
+#include "ext_ncd_get_var_td.F90"
 end subroutine ext_ncd_get_var_td_double
 
 subroutine ext_ncd_get_var_ti_integer(DataHandle,Element,Var,Data,Count,OutCount,Status)
@@ -2192,7 +2192,7 @@ subroutine ext_ncd_get_var_ti_integer(DataHandle,Element,Var,Data,Count,OutCount
 #define NF_TYPE NF_INT
 #define NF_ROUTINE NF_GET_ATT_INT
 #define COPY   Data(1:min(XLen,Count)) = Buffer(1:min(XLen,Count))
-#include "ext_ncd_get_var_ti.code"
+#include "ext_ncd_get_var_ti.F90"
 end subroutine ext_ncd_get_var_ti_integer
 
 subroutine ext_ncd_get_var_td_integer(DataHandle,Element,DateStr,Var,Data,Count,OutCount,Status)
@@ -2214,7 +2214,7 @@ subroutine ext_ncd_get_var_td_integer(DataHandle,Element,DateStr,Var,Data,Count,
 #define NF_ROUTINE NF_GET_VARA_INT
 #define LENGTH min(Count,Len1)
 #define COPY   Data(1:min(Len1,Count)) = Buffer(1:min(Len1,Count))
-#include "ext_ncd_get_var_td.code"
+#include "ext_ncd_get_var_td.F90"
 end subroutine ext_ncd_get_var_td_integer
 
 subroutine ext_ncd_get_var_ti_logical(DataHandle,Element,Var,Data,Count,OutCount,Status)
@@ -2234,7 +2234,7 @@ subroutine ext_ncd_get_var_ti_logical(DataHandle,Element,Var,Data,Count,OutCount
 #define NF_TYPE NF_INT
 #define NF_ROUTINE NF_GET_ATT_INT
 #define COPY   Data(1:min(XLen,Count)) = Buffer(1:min(XLen,Count))==1
-#include "ext_ncd_get_var_ti.code"
+#include "ext_ncd_get_var_ti.F90"
 end subroutine ext_ncd_get_var_ti_logical
 
 subroutine ext_ncd_get_var_td_logical(DataHandle,Element,DateStr,Var,Data,Count,OutCount,Status)
@@ -2256,7 +2256,7 @@ subroutine ext_ncd_get_var_td_logical(DataHandle,Element,DateStr,Var,Data,Count,
 #define NF_ROUTINE NF_GET_VARA_INT
 #define LENGTH min(Count,Len1)
 #define COPY   Data(1:min(Len1,Count)) = Buffer(1:min(Len1,Count))==1
-#include "ext_ncd_get_var_td.code"
+#include "ext_ncd_get_var_td.F90"
 end subroutine ext_ncd_get_var_td_logical
 
 subroutine ext_ncd_get_var_ti_char(DataHandle,Element,Var,Data,Status)
@@ -2277,7 +2277,7 @@ subroutine ext_ncd_get_var_ti_char(DataHandle,Element,Var,Data,Status)
 #define NF_ROUTINE NF_GET_ATT_TEXT
 #define COPY 
 #define CHAR_TYPE
-#include "ext_ncd_get_var_ti.code"
+#include "ext_ncd_get_var_ti.F90"
 #undef CHAR_TYPE
 end subroutine ext_ncd_get_var_ti_char
 
@@ -2299,7 +2299,7 @@ subroutine ext_ncd_get_var_td_char(DataHandle,Element,DateStr,Var,Data,Status)
 #define NF_ROUTINE NF_GET_VARA_TEXT
 #define LENGTH Len1
 #define CHAR_TYPE
-#include "ext_ncd_get_var_td.code"
+#include "ext_ncd_get_var_td.F90"
 #undef CHAR_TYPE
 end subroutine ext_ncd_get_var_td_char
 
