@@ -1,3 +1,7 @@
+# This is the CMake file for the NCEPLIBS-wrf_io libsrc directory.
+#
+# Kyle Gerheiser, other programmer.
+
 list(APPEND definitions
   WRFIO_NCD_LARGE_FILE_SUPPORT
   NO_M4)
@@ -23,13 +27,13 @@ endif()
 set(fortran_src
   wrf_io.F90
   field_routines.F90
-  ext_ncd_get_dom_ti.code
-  ext_ncd_get_var_td.code
-  ext_ncd_get_var_ti.code
-  ext_ncd_put_dom_ti.code
-  ext_ncd_put_var_td.code
-  ext_ncd_put_var_ti.code
-  transpose.code)
+  ext_ncd_get_dom_ti.F90
+  ext_ncd_get_var_td.F90
+  ext_ncd_get_var_ti.F90
+  ext_ncd_put_dom_ti.F90
+  ext_ncd_put_var_td.F90
+  ext_ncd_put_var_ti.F90
+  transpose.F90)
 
 set(lib_name ${PROJECT_NAME})
 set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include)
