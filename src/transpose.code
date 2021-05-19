@@ -8,12 +8,12 @@
 
 ! pjj/cray
   if(IO == 'write') then
-!dir$ concurrent
+!!dir$ concurrent
 !$OMP PARALLEL DO SCHEDULE(RUNTIME) PRIVATE(i,j,k)
   do k=k1,k2
     do j=j1,j2
-!dir$ prefervector
-!dir$ concurrent
+!!dir$ prefervector
+!!dir$ concurrent
 !cdir select(vector)
       do i=i1,i2
           DFIELD = Field(1:di,abs(ix-i),abs(jx-j),abs(kx-k))
@@ -22,12 +22,12 @@
   enddo
 !$OMP END PARALLEL DO
 else
-!dir$ concurrent
+!!dir$ concurrent
 !$OMP PARALLEL DO SCHEDULE(RUNTIME) PRIVATE(i,j,k)
   do k=k1,k2
     do j=j1,j2
-!dir$ prefervector
-!dir$ concurrent
+!!dir$ prefervector
+!!dir$ concurrent
 !cdir select(vector)
       do i=i1,i2
           Field(1:di,abs(ix-i),abs(jx-j),abs(kx-k)) = DFIELD

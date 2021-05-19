@@ -1,18 +1,14 @@
-# This is the main CMake file for NCEPLIBS-wrf_io.
-#
-# Other programmer, Ed Hartnett
 cmake_minimum_required(VERSION 3.15)
 
-# Get the version from the VERSION file.
 file(STRINGS "VERSION" pVersion)
 
-# Initialize project.
-project(wrf_io VERSION ${pVersion} LANGUAGES Fortran)
+project(
+  wrf_io
+  VERSION ${pVersion}
+  LANGUAGES C Fortran)
 
-# Add custom CMake Modules.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# User build options.
 option(OPENMP "Enable OpenMP threading" OFF)
 option(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 
@@ -27,18 +23,20 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
                                                "MinSizeRel" "RelWithDebInfo")
 endif()
 
-# Find netCDF.
+if(NOT CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel|GNU)$")
+  message(WARNING "Compiler not officially supported: ${CMAKE_Fortran_COMPILER_ID}")
+endif()
+
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
 
-# Find OpenMP if desired.
 if(OPENMP)
   find_package(OpenMP REQUIRED COMPONENTS Fortran)
 endif()
 
-add_subdirectory(libsrc)
+add_subdirectory(src)
 
 # Determine whether or not to generate documentation.
 if(ENABLE_DOCS)
   find_package(Doxygen REQUIRED)
+  add_subdirectory(docs)
 endif()
-add_subdirectory(docs)  
