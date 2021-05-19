@@ -32,7 +32,6 @@ set(c_src
 
 set(lib_name ${PROJECT_NAME})
 set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include)
-include_directories( $ENV{NETCDF}/include )
 
 add_library(${lib_name}_f OBJECT ${fortran_src})
 set_target_properties(${lib_name}_f PROPERTIES Fortran_MODULE_DIRECTORY ${module_dir})
