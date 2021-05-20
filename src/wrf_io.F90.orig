@@ -105,7 +105,7 @@ module ext_ncd_support_routines
 CONTAINS
 
 subroutine allocHandle(DataHandle,DH,Comm,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   integer              ,intent(out) :: DataHandle
   type(wrf_data_handle),pointer     :: DH
@@ -122,70 +122,70 @@ subroutine allocHandle(DataHandle,DH,Comm,Status)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%DimLengths(MaxDims), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%DimIDs(MaxDims), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%DimNames(MaxDims), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%MDVarIDs(MaxVars), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%MDVarDimLens(MaxVars), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%MDVarNames(MaxVars), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%VarIDs(MaxVars), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%VarDimLens(NVarDims-1,MaxVars), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       allocate(DH%VarNames(MaxVars), STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_ALLOCATION_ERROR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       exit
@@ -193,9 +193,9 @@ subroutine allocHandle(DataHandle,DH,Comm,Status)
     if(i==WrfDataHandleMax) then
       Status = WRF_WARN_TOO_MANY_FILES
       write(msg,*) 'Warning TOO MANY FILES in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       write(msg,*) 'Did you call ext_ncd_ioinit?'
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
   enddo
@@ -209,7 +209,7 @@ subroutine allocHandle(DataHandle,DH,Comm,Status)
 end subroutine allocHandle
 
 subroutine deallocHandle(DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   integer              ,intent(in) :: DataHandle
   integer              ,intent(out) :: Status
@@ -224,70 +224,70 @@ subroutine deallocHandle(DataHandle, Status)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%DimLengths, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%DimIDs, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%DimNames, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%MDVarIDs, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%MDVarDimLens, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%MDVarNames, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%VarIDs, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%VarDimLens, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       deallocate(DH%VarNames, STAT=stat)
       if(stat/= 0) then
         Status = WRF_ERR_FATAL_DEALLOCATION_ERR
         write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-        call wrf_message (  msg)
+        call mdl_message (  msg)
         return
       endif
       DH%Free      =.TRUE.
@@ -297,7 +297,7 @@ subroutine deallocHandle(DataHandle, Status)
 end subroutine deallocHandle
 
 subroutine GetDH(DataHandle,DH,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   integer               ,intent(in)     :: DataHandle
   type(wrf_data_handle) ,pointer        :: DH
@@ -317,7 +317,7 @@ subroutine GetDH(DataHandle,DH,Status)
 end subroutine GetDH
 
 subroutine DateCheck(Date,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   character*(*) ,intent(in)      :: Date
   integer       ,intent(out)     :: Status
@@ -331,7 +331,7 @@ subroutine DateCheck(Date,Status)
 end subroutine DateCheck
 
 subroutine GetName(Element,Var,Name,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   character*(*) ,intent(in)     :: Element
   character*(*) ,intent(in)     :: Var
@@ -354,7 +354,7 @@ subroutine GetName(Element,Var,Name,Status)
 end subroutine GetName
 
 subroutine GetTimeIndex(IO,DataHandle,DateStr,TimeIndex,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   include 'netcdf.inc'
   character (*)         ,intent(in)     :: IO
@@ -373,7 +373,7 @@ subroutine GetTimeIndex(IO,DataHandle,DateStr,TimeIndex,Status)
   if(Status /= WRF_NO_ERR) then
     Status =  WRF_WARN_DATESTR_ERROR
     write(msg,*) 'Warning DATE STRING ERROR in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(IO == 'write') then
@@ -388,7 +388,7 @@ subroutine GetTimeIndex(IO,DataHandle,DateStr,TimeIndex,Status)
       if(TimeIndex > MaxTimes) then
         Status = WRF_WARN_TIME_EOF
         write(msg,*) 'Warning TIME EOF in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     endif
@@ -402,7 +402,7 @@ subroutine GetTimeIndex(IO,DataHandle,DateStr,TimeIndex,Status)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
   else
@@ -415,7 +415,7 @@ subroutine GetTimeIndex(IO,DataHandle,DateStr,TimeIndex,Status)
       if(i==MaxTimes) then
         Status = WRF_WARN_TIME_NF
         write(msg,*) 'Warning TIME ',DateStr,' NOT FOUND in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     enddo
@@ -494,7 +494,7 @@ subroutine GetIndices(NDim,Start,End,i1,i2,j1,j2,k1,k2)
 end subroutine GetIndices
 
 logical function ZeroLengthHorzDim(MemoryOrder,Vector,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   character*(*)              ,intent(in)    :: MemoryOrder
   integer,dimension(*)       ,intent(in)    :: Vector
@@ -530,7 +530,7 @@ logical function ZeroLengthHorzDim(MemoryOrder,Vector,Status)
 end function ZeroLengthHorzDim
 
 subroutine ExtOrder(MemoryOrder,Vector,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   character*(*)              ,intent(in)    :: MemoryOrder
   integer,dimension(*)       ,intent(inout) :: Vector
@@ -577,7 +577,7 @@ subroutine ExtOrder(MemoryOrder,Vector,Status)
 end subroutine ExtOrder
 
 subroutine ExtOrderStr(MemoryOrder,Vector,ROVector,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   character*(*)                    ,intent(in)    :: MemoryOrder
   character*(*),dimension(*)       ,intent(in)    :: Vector
@@ -659,7 +659,7 @@ subroutine UpperCase(MemoryOrder,MemOrd)
 end subroutine UpperCase
 
 subroutine netcdf_err(err,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   include 'netcdf.inc'
   integer  ,intent(in)  :: err
@@ -672,7 +672,7 @@ subroutine netcdf_err(err,Status)
   else
     errmsg = NF_STRERROR(err) 
     write(msg,*) 'NetCDF error: ',errmsg
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     Status = WRF_WARN_NETCDF
   endif
   return
@@ -680,7 +680,7 @@ end subroutine netcdf_err
 
 subroutine FieldIO(IO,DataHandle,DateStr,Length,MemoryOrder &
                      ,FieldType,NCID,VarID,XField,Status)
-  use wrf_data
+  use wrf_data; use module_message
   include 'wrf_status_codes.h'
   include 'netcdf.inc'
   character (*)              ,intent(in)    :: IO
@@ -702,9 +702,9 @@ subroutine FieldIO(IO,DataHandle,DateStr,Length,MemoryOrder &
   call GetTimeIndex(IO,DataHandle,DateStr,TimeIndex,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     write(msg,*) '  Bad time index for DateStr = ',DateStr
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   call GetDim(MemoryOrder,NDim,Status)
@@ -729,7 +729,7 @@ subroutine FieldIO(IO,DataHandle,DateStr,Length,MemoryOrder &
    write(6,*) 'WARNING---- some missing calls commented out'
       Status = WRF_WARN_DATA_TYPE_NOT_FOUND
       write(msg,*) 'Warning DATA TYPE NOT FOUND in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
   END IF
 
@@ -833,7 +833,7 @@ end subroutine reorder
 ! file referenced by DataHandle.  If DataHandle is invalid, .FALSE. is 
 ! returned.  
 LOGICAL FUNCTION ncd_ok_to_put_dom_ti( DataHandle )
-    USE wrf_data
+    use wrf_data; use module_message
     include 'wrf_status_codes.h'
     INTEGER, INTENT(IN) :: DataHandle 
     CHARACTER*80 :: fname
@@ -844,7 +844,7 @@ LOGICAL FUNCTION ncd_ok_to_put_dom_ti( DataHandle )
     IF ( Status /= WRF_NO_ERR ) THEN
       write(msg,*) 'Warning Status = ',Status,' in ',__FILE__, &
                    ', line', __LINE__
-      call wrf_message (  TRIM(msg) )
+      call mdl_message (  TRIM(msg) )
       retval = .FALSE.
     ELSE
       dryrun       = ( filestate .EQ. WRF_FILE_OPENED_NOT_COMMITTED )
@@ -859,7 +859,7 @@ END FUNCTION ncd_ok_to_put_dom_ti
 ! file referenced by DataHandle.  If DataHandle is invalid, .FALSE. is 
 ! returned.  
 LOGICAL FUNCTION ncd_ok_to_get_dom_ti( DataHandle )
-    USE wrf_data
+    use wrf_data; use module_message
     include 'wrf_status_codes.h'
     INTEGER, INTENT(IN) :: DataHandle 
     CHARACTER*80 :: fname
@@ -870,7 +870,7 @@ LOGICAL FUNCTION ncd_ok_to_get_dom_ti( DataHandle )
     IF ( Status /= WRF_NO_ERR ) THEN
       write(msg,*) 'Warning Status = ',Status,' in ',__FILE__, &
                    ', line', __LINE__
-      call wrf_message (  TRIM(msg) )
+      call mdl_message (  TRIM(msg) )
       retval = .FALSE.
     ELSE
       dryrun       = ( filestate .EQ. WRF_FILE_OPENED_NOT_COMMITTED )
@@ -883,7 +883,7 @@ END FUNCTION ncd_ok_to_get_dom_ti
 ! Returns .TRUE. iff nothing has been read from or written to the file 
 ! referenced by DataHandle.  If DataHandle is invalid, .FALSE. is returned.  
 LOGICAL FUNCTION ncd_is_first_operation( DataHandle )
-    USE wrf_data
+    use wrf_data; use module_message
     INCLUDE 'wrf_status_codes.h'
     INTEGER, INTENT(IN) :: DataHandle 
     TYPE(wrf_data_handle) ,POINTER :: DH
@@ -893,7 +893,7 @@ LOGICAL FUNCTION ncd_is_first_operation( DataHandle )
     IF ( Status /= WRF_NO_ERR ) THEN
       write(msg,*) 'Warning Status = ',Status,' in ',__FILE__, &
                    ', line', __LINE__
-      call wrf_message (  TRIM(msg) )
+      call mdl_message (  TRIM(msg) )
       retval = .FALSE.
     ELSE
       retval = DH%first_operation
@@ -978,7 +978,7 @@ subroutine TransposeToR4(IO,MemoryOrder,di, Field,l1,l2,m1,m2,n1,n2 &
 end subroutine TransposeToR4
 
 subroutine ext_ncd_open_for_read(DatasetName, Comm1, Comm2, SysDepInfo, DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -999,7 +999,7 @@ end subroutine ext_ncd_open_for_read
 !ends training phase; switches internal flag to enable input
 !must be paired with call to ext_ncd_open_for_read_begin
 subroutine ext_ncd_open_for_read_commit(DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1011,13 +1011,13 @@ subroutine ext_ncd_open_for_read_commit(DataHandle, Status)
   if(WrfIOnotInitialized) then
     Status = WRF_IO_NOT_INITIALIZED
     write(msg,*) 'ext_ncd_ioinit was not called ',__FILE__,', line', __LINE__
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     return
   endif
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%FileStatus      = WRF_FILE_OPENED_FOR_READ
@@ -1027,7 +1027,7 @@ subroutine ext_ncd_open_for_read_commit(DataHandle, Status)
 end subroutine ext_ncd_open_for_read_commit
 
 subroutine ext_ncd_open_for_read_begin( FileName, Comm, IOComm, SysDepInfo, DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1062,13 +1062,13 @@ subroutine ext_ncd_open_for_read_begin( FileName, Comm, IOComm, SysDepInfo, Data
   if(WrfIOnotInitialized) then
     Status = WRF_IO_NOT_INITIALIZED 
     write(msg,*) 'ext_ncd_ioinit was not called ',__FILE__,', line', __LINE__
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     return
   endif
   call allocHandle(DataHandle,DH,Comm,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
 
@@ -1076,53 +1076,53 @@ subroutine ext_ncd_open_for_read_begin( FileName, Comm, IOComm, SysDepInfo, Data
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_VARID(DH%NCID,DH%TimesName,VarID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_VAR(DH%NCID,VarID,DH%TimesName, XType, StoredDim, DimIDs, NAtts)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(XType/=NF_CHAR) then
     Status = WRF_WARN_TYPE_MISMATCH
     write(msg,*) 'Warning TYPE MISMATCH in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_DIMLEN(DH%NCID,DimIDs(1),VLen(1))  
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(VLen(1) /= DateStrLen) then
     Status = WRF_WARN_DATESTR_BAD_LENGTH
     write(msg,*) 'Warning DATESTR BAD LENGTH in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_DIMLEN(DH%NCID,DimIDs(2),VLen(2))
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(VLen(2) > MaxTimes) then
     Status = WRF_ERR_FATAL_TOO_MANY_TIMES
     write(msg,*) 'Fatal TOO MANY TIME VALUES in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   VStart(1) = 1
@@ -1131,14 +1131,14 @@ subroutine ext_ncd_open_for_read_begin( FileName, Comm, IOComm, SysDepInfo, Data
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_NVARS(DH%NCID,TotalNumVars)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   NumVars = 0
@@ -1147,7 +1147,7 @@ subroutine ext_ncd_open_for_read_begin( FileName, Comm, IOComm, SysDepInfo, Data
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     elseif(Name(1:5) /= 'md___' .and. Name /= DH%TimesName) then
       NumVars              = NumVars+1
@@ -1167,7 +1167,7 @@ subroutine ext_ncd_open_for_read_begin( FileName, Comm, IOComm, SysDepInfo, Data
 end subroutine ext_ncd_open_for_read_begin
 
 subroutine ext_ncd_open_for_update( FileName, Comm, IOComm, SysDepInfo, DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1202,66 +1202,66 @@ subroutine ext_ncd_open_for_update( FileName, Comm, IOComm, SysDepInfo, DataHand
   if(WrfIOnotInitialized) then
     Status = WRF_IO_NOT_INITIALIZED 
     write(msg,*) 'ext_ncd_ioinit was not called ',__FILE__,', line', __LINE__
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     return
   endif
   call allocHandle(DataHandle,DH,Comm,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_OPEN(FileName, NF_WRITE, DH%NCID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_VARID(DH%NCID,DH%TimesName,VarID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_VAR(DH%NCID,VarID,DH%TimesName, XType, StoredDim, DimIDs, NAtts)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(XType/=NF_CHAR) then
     Status = WRF_WARN_TYPE_MISMATCH
     write(msg,*) 'Warning TYPE MISMATCH in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_DIMLEN(DH%NCID,DimIDs(1),VLen(1))  
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(VLen(1) /= DateStrLen) then
     Status = WRF_WARN_DATESTR_BAD_LENGTH
     write(msg,*) 'Warning DATESTR BAD LENGTH in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_DIMLEN(DH%NCID,DimIDs(2),VLen(2))
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(VLen(2) > MaxTimes) then
     Status = WRF_ERR_FATAL_TOO_MANY_TIMES
     write(msg,*) 'Fatal TOO MANY TIME VALUES in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   VStart(1) = 1
@@ -1270,14 +1270,14 @@ subroutine ext_ncd_open_for_update( FileName, Comm, IOComm, SysDepInfo, DataHand
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_INQ_NVARS(DH%NCID,TotalNumVars)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   NumVars = 0
@@ -1286,7 +1286,7 @@ subroutine ext_ncd_open_for_update( FileName, Comm, IOComm, SysDepInfo, DataHand
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     elseif(Name(1:5) /= 'md___' .and. Name /= DH%TimesName) then
       NumVars              = NumVars+1
@@ -1307,7 +1307,7 @@ end subroutine ext_ncd_open_for_update
 
 
 SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHandle,Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1336,13 +1336,13 @@ SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHand
   if(WrfIOnotInitialized) then
     Status = WRF_IO_NOT_INITIALIZED 
     write(msg,*) 'ext_ncd_open_for_write_begin: ext_ncd_ioinit was not called ',__FILE__,', line', __LINE__
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     return
   endif
   call allocHandle(DataHandle,DH,Comm,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Fatal ALLOCATION ERROR in ext_ncd_open_for_write_begin ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%TimeIndex = 0
@@ -1351,7 +1351,7 @@ SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHand
 ! create_mode = IOR(nf_netcdf4, nf_classic_model)
   if ( DH%use_netcdf_classic ) then
   write(msg,*) 'output will be in classic NetCDF format'
-  call wrf_message (  TRIM(msg))
+  call mdl_message (  TRIM(msg))
 #ifdef WRFIO_NCD_NO_LARGE_FILE_SUPPORT
   stat = NF_CREATE(FileName, NF_CLOBBER, DH%NCID)
 #else
@@ -1372,7 +1372,7 @@ SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHand
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_open_for_write_begin ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%FileStatus  = WRF_FILE_OPENED_NOT_COMMITTED
@@ -1381,7 +1381,7 @@ SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHand
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_open_for_write_begin ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%VarNames  (1:MaxVars) = NO_NAME
@@ -1396,7 +1396,7 @@ SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHand
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_open_for_write_begin ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   VDimIDs(1) = DH%DimIDs(1)
@@ -1405,7 +1405,7 @@ SUBROUTINE ext_ncd_open_for_write_begin(FileName,Comm,IOComm,SysDepInfo,DataHand
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_open_for_write_begin ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%DimLengths(1) = DateStrLen
@@ -1426,7 +1426,7 @@ end subroutine ext_ncd_open_for_write_begin
 !no training phase for this version of the open stmt.
 subroutine ext_ncd_open_for_write (DatasetName, Comm1, Comm2, &
                                    SysDepInfo, DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1442,7 +1442,7 @@ subroutine ext_ncd_open_for_write (DatasetName, Comm1, Comm2, &
 end subroutine ext_ncd_open_for_write
 
 SUBROUTINE ext_ncd_open_for_write_commit(DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1457,30 +1457,30 @@ SUBROUTINE ext_ncd_open_for_write_commit(DataHandle, Status)
   if(WrfIOnotInitialized) then
     Status = WRF_IO_NOT_INITIALIZED 
     write(msg,*) 'ext_ncd_open_for_write_commit: ext_ncd_ioinit was not called ',__FILE__,', line', __LINE__
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     return
   endif
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ext_ncd_open_for_write_commit ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg)) 
+    call mdl_message (  TRIM(msg)) 
     return
   endif
   if ( DH%nofill ) then
     Status = NF_SET_FILL(DH%NCID,NF_NOFILL, oldmode )
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'Warning Status = ',Status,' from NF_SET_FILL ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg)) 
+      call mdl_message (  TRIM(msg)) 
       return
     endif
     write(msg,*) 'Information: NOFILL being set for writing to ',TRIM(DH%FileName)
-    call wrf_message (  TRIM(msg)) 
+    call mdl_message (  TRIM(msg)) 
   endif
   stat = NF_ENDDEF(DH%NCID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_open_for_write_commit ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%FileStatus  = WRF_FILE_OPENED_FOR_WRITE
@@ -1489,7 +1489,7 @@ SUBROUTINE ext_ncd_open_for_write_commit(DataHandle, Status)
 end subroutine ext_ncd_open_for_write_commit
 
 subroutine ext_ncd_ioclose(DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1502,17 +1502,17 @@ subroutine ext_ncd_ioclose(DataHandle, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ext_ncd_ioclose ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ext_ncd_ioclose ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_DRYRUN_CLOSE
     write(msg,*) 'Warning TRY TO CLOSE DRYRUN in ext_ncd_ioclose ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     continue    
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
@@ -1522,7 +1522,7 @@ subroutine ext_ncd_ioclose(DataHandle, Status)
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ext_ncd_ioclose ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
 
@@ -1530,7 +1530,7 @@ subroutine ext_ncd_ioclose(DataHandle, Status)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_ioclose ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   CALL deallocHandle( DataHandle, Status )
@@ -1539,7 +1539,7 @@ subroutine ext_ncd_ioclose(DataHandle, Status)
 end subroutine ext_ncd_ioclose
 
 subroutine ext_ncd_iosync( DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1552,17 +1552,17 @@ subroutine ext_ncd_iosync( DataHandle, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ext_ncd_iosync ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ext_ncd_iosync ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_FILE_NOT_COMMITTED
     write(msg,*) 'Warning FILE NOT COMMITTED in ext_ncd_iosync ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     continue
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
@@ -1570,14 +1570,14 @@ subroutine ext_ncd_iosync( DataHandle, Status)
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ext_ncd_iosync ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_SYNC(DH%NCID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ext_ncd_iosync ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   return
@@ -1586,7 +1586,7 @@ end subroutine ext_ncd_iosync
 
 
 subroutine ext_ncd_redef( DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1599,17 +1599,17 @@ subroutine ext_ncd_redef( DataHandle, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_FILE_NOT_COMMITTED
     write(msg,*) 'Warning FILE NOT COMMITTED in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     continue
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_UPDATE) then
@@ -1617,18 +1617,18 @@ subroutine ext_ncd_redef( DataHandle, Status)
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
     Status = WRF_WARN_FILE_OPEN_FOR_READ
     write(msg,*) 'Warning FILE OPEN FOR READ in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_REDEF(DH%NCID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%FileStatus  = WRF_FILE_OPENED_NOT_COMMITTED
@@ -1636,7 +1636,7 @@ subroutine ext_ncd_redef( DataHandle, Status)
 end subroutine ext_ncd_redef
 
 subroutine ext_ncd_enddef( DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1649,34 +1649,34 @@ subroutine ext_ncd_enddef( DataHandle, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_FILE_NOT_COMMITTED
     write(msg,*) 'Warning FILE NOT COMMITTED in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     continue
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
     Status = WRF_WARN_FILE_OPEN_FOR_READ
     write(msg,*) 'Warning FILE OPEN FOR READ in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   stat = NF_ENDDEF(DH%NCID)
   call netcdf_err(stat,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   DH%FileStatus  = WRF_FILE_OPENED_FOR_WRITE
@@ -1684,7 +1684,7 @@ subroutine ext_ncd_enddef( DataHandle, Status)
 end subroutine ext_ncd_enddef
 
 subroutine ext_ncd_ioinit(SysDepInfo, Status)
-  use wrf_data
+  use wrf_data; use module_message
   implicit none
   include 'wrf_status_codes.h'
   CHARACTER*(*), INTENT(IN) :: SysDepInfo
@@ -1706,7 +1706,7 @@ end subroutine ext_ncd_ioinit
 
 
 subroutine ext_ncd_inquiry (Inquiry, Result, Status)
-  use wrf_data
+  use wrf_data; use module_message
   implicit none
   include 'wrf_status_codes.h'
   character *(*), INTENT(IN)    :: Inquiry
@@ -1734,7 +1734,7 @@ end subroutine ext_ncd_inquiry
 
 
 subroutine ext_ncd_ioexit(Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -1747,7 +1747,7 @@ subroutine ext_ncd_ioexit(Status)
   if(WrfIOnotInitialized) then
     Status = WRF_IO_NOT_INITIALIZED 
     write(msg,*) 'ext_ncd_ioinit was not called ',__FILE__,', line', __LINE__
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     return
   endif
   do i=1,WrfDataHandleMax
@@ -2422,7 +2422,7 @@ end subroutine ext_ncd_get_dom_td_char
 subroutine ext_ncd_write_field(DataHandle,DateStr,Var,Field,FieldTypeIn,  &
   Comm, IOComm, DomainDesc, MemoryOrdIn, Stagger,  DimNames,              &
   DomainStart,DomainEnd,MemoryStart,MemoryEnd,PatchStart,PatchEnd,Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -2480,21 +2480,21 @@ subroutine ext_ncd_write_field(DataHandle,DateStr,Var,Field,FieldTypeIn,  &
   call GetDim(MemoryOrder,NDim,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning BAD MEMORY ORDER |',MemoryOrder,'| in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
 
   call DateCheck(DateStr,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning DATE STRING ERROR |',DateStr,'| in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   VarName = Var
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   NCID = DH%NCID
@@ -2522,7 +2522,7 @@ endif
 
   IF ( ZeroLengthHorzDim(MemoryOrder,Length,Status) ) THEN
      write(msg,*)'ext_ncd_write_field: zero length dimension in ',TRIM(Var),'. Ignoring'
-     call wrf_message (  TRIM(msg))
+     call mdl_message (  TRIM(msg))
      return
   ENDIF
 
@@ -2531,17 +2531,17 @@ endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
     Status = WRF_WARN_WRITE_RONLY_FILE
     write(msg,*) 'Warning WRITE READ ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     do NVar=1,MaxVars
       if(DH%VarNames(NVar) == VarName ) then
         Status = WRF_WARN_2DRYRUNS_1VARIABLE
         write(msg,*) 'Warning 2 DRYRUNS 1 VARIABLE in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       elseif(DH%VarNames(NVar) == NO_NAME) then
         DH%VarNames(NVar) = VarName
@@ -2550,7 +2550,7 @@ endif
       elseif(NVar == MaxVars) then
         Status = WRF_WARN_TOO_MANY_VARIABLES
         write(msg,*) 'Warning TOO MANY VARIABLES in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     enddo
@@ -2564,7 +2564,7 @@ endif
             call netcdf_err(stat,Status)
             if(Status /= WRF_NO_ERR) then
               write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-              call wrf_message (  TRIM(msg))
+              call mdl_message (  TRIM(msg))
               return
             endif
             DH%DimLengths(i) = Length(j)
@@ -2572,7 +2572,7 @@ endif
           elseif(i == MaxDims) then
             Status = WRF_WARN_TOO_MANY_DIMS
             write(msg,*) 'Warning TOO MANY DIMENSIONS in ',__FILE__,', line', __LINE__ 
-            call wrf_message (  TRIM(msg))
+            call mdl_message (  TRIM(msg))
             return
           endif
         enddo
@@ -2587,7 +2587,7 @@ endif
               Status = WRF_WARN_DIMNAME_REDEFINED
               write(msg,*) 'Warning DIM ',i,', NAME ',TRIM(DH%DimNames(i)),' REDEFINED  by var ', &
                            TRIM(Var),' ',DH%DimLengths(i),Length(j) ,' in ', __FILE__ ,' line', __LINE__ 
-              call wrf_message (  TRIM(msg))
+              call mdl_message (  TRIM(msg))
               return
             endif
           endif
@@ -2600,7 +2600,7 @@ endif
               call netcdf_err(stat,Status)
               if(Status /= WRF_NO_ERR) then
                 write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__
-                call wrf_message (  TRIM(msg))
+                call mdl_message (  TRIM(msg))
                 return
               endif
               DH%DimLengths(i) = Length(j)
@@ -2608,7 +2608,7 @@ endif
             elseif(i == MaxDims) then
               Status = WRF_WARN_TOO_MANY_DIMS
               write(msg,*) 'Warning TOO MANY DIMENSIONS in ',__FILE__,', line', __LINE__ 
-              call wrf_message (  TRIM(msg))
+              call mdl_message (  TRIM(msg))
               return
             endif
           enddo
@@ -2631,7 +2631,7 @@ endif
     ELSE
         Status = WRF_WARN_DATA_TYPE_NOT_FOUND
         write(msg,*) 'Warning DATA TYPE NOT FOUND in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
     END IF
 
@@ -2639,7 +2639,7 @@ endif
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'ext_ncd_write_field: NetCDF error for ',TRIM(VarName),' in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
 
@@ -2676,7 +2676,7 @@ endif
      call netcdf_err(stat,Status)
      if(Status /= WRF_NO_ERR) then
        write(msg,*) 'ext_ncd_write_field: NetCDF def chunking error for ',TRIM(VarName),' in ',__FILE__,', line', __LINE__
-       call wrf_message (  TRIM(msg))
+       call mdl_message (  TRIM(msg))
        return
      endif
 
@@ -2684,7 +2684,7 @@ endif
       call netcdf_err(stat,Status)
       if(Status /= WRF_NO_ERR) then
          write(msg,*) 'ext_ncd_write_field: NetCDF def compression  error for ',TRIM(VarName),' in ',__FILE__,', line', __LINE__
-         call wrf_message (  TRIM(msg))
+         call mdl_message (  TRIM(msg))
          return
       endif
   endif
@@ -2695,7 +2695,7 @@ endif
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'ext_ncd_write_field: NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     call reorder(MemoryOrder,MemO)
@@ -2704,7 +2704,7 @@ endif
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'ext_ncd_write_field: NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE .OR. DH%FileStatus == WRF_FILE_OPENED_FOR_UPDATE) then
@@ -2714,7 +2714,7 @@ endif
       elseif(NVar == DH%NumVars) then
         Status = WRF_WARN_VAR_NF
         write(msg,*) 'Warning VARIABLE NOT FOUND in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     enddo
@@ -2724,16 +2724,16 @@ endif
         Status = WRF_WARN_WRTLEN_NE_DRRUNLEN
         write(msg,*) 'Warning LENGTH != DRY RUN LENGTH for |',   &
                      VarName,'| dim ',j,' in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         write(msg,*) '   LENGTH ',Length(j),' DRY RUN LENGTH ',DH%VarDimLens(j,NVar)
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
 !jm 010825      elseif(DomainStart(j) < MemoryStart(j)) then
       elseif(PatchStart(j) < MemoryStart(j)) then
         Status = WRF_WARN_DIMENSION_ERROR
         write(msg,*) 'Warning DIMENSION ERROR for |',VarName,    &
                      '| in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     enddo
@@ -2747,7 +2747,7 @@ endif
     if(stat/= 0) then
       Status = WRF_ERR_FATAL_ALLOCATION_ERROR
       write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     if (DH%R4OnOutput .and. FieldTypeIn == WRF_DOUBLE) then
@@ -2763,20 +2763,20 @@ endif
                   FieldType,NCID,VarID,XField,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     deallocate(XField, STAT=stat)
     if(stat/= 0) then
       Status = WRF_ERR_FATAL_DEALLOCATION_ERR
       write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   endif
   DH%first_operation  = .FALSE.
   return
@@ -2785,7 +2785,7 @@ end subroutine ext_ncd_write_field
 subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
   IOComm, DomainDesc, MemoryOrdIn, Stagger, DimNames,                       &
   DomainStart,DomainEnd,MemoryStart,MemoryEnd,PatchStart,PatchEnd,Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -2840,38 +2840,38 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning BAD MEMORY ORDER |',TRIM(MemoryOrder),'| for |', &
                  TRIM(Var),'| in ext_ncd_read_field ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   call DateCheck(DateStr,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning DATE STRING ERROR |',TRIM(DateStr),'| for |',TRIM(Var), &
                  '| in ext_ncd_read_field ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   VarName = Var
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ext_ncd_read_field ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
 ! jm it is okay to have a dry run read. means read is called between ofrb and ofrc. Just return.
 !    Status = WRF_WARN_DRYRUN_READ
 !    write(msg,*) 'Warning DRYRUN READ in ',__FILE__,', line', __LINE__ 
-!    call wrf_message (  TRIM(msg))
+!    call mdl_message (  TRIM(msg))
     Status = WRF_NO_ERR
     RETURN
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     Status = WRF_WARN_READ_WONLY_FILE
     write(msg,*) 'Warning READ WRITE ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ .OR. DH%FileStatus == WRF_FILE_OPENED_FOR_UPDATE ) then
     NCID = DH%NCID
 
@@ -2882,21 +2882,21 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__,' Varname ',Varname
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     stat = NF_INQ_VAR(NCID,VarID,Name,XType,StoredDim,VDimIDs,NAtts)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     stat = NF_GET_ATT_INT(NCID,VarID,'FieldType',FType)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
 ! allow coercion between double and single prec real
@@ -2905,13 +2905,13 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
       if ( .NOT. (Ftype     == WRF_REAL .OR. Ftype     == WRF_DOUBLE ))  then
         Status = WRF_WARN_TYPE_MISMATCH
         write(msg,*) 'Warning TYPE MISMATCH in ',__FILE__,', line', __LINE__
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     else if(FieldType /= Ftype) then
       Status = WRF_WARN_TYPE_MISMATCH
       write(msg,*) 'Warning TYPE MISMATCH in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif      
       
@@ -2944,7 +2944,7 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
     END IF
 
     if(Status /= WRF_NO_ERR) then
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     ! NDim=0 for scalars.  Handle read of old NDim=1 files.  TBH:  20060502
@@ -2953,7 +2953,7 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
       call netcdf_err(stat,Status)
       if(Status /= WRF_NO_ERR) then
         write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
       IF ( dimname(1:10) == 'ext_scalar' ) THEN
@@ -2964,9 +2964,9 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
     if(StoredDim /= NDim+1) then
       Status = WRF_ERR_FATAL_BAD_VARIABLE_DIM
       write(msg,*) 'Fatal error BAD VARIABLE DIMENSION in ext_ncd_read_field ',TRIM(Var),TRIM(DateStr)
-      call wrf_message (  msg)
+      call mdl_message (  msg)
       write(msg,*) '  StoredDim ', StoredDim, ' .NE. NDim+1 ', NDim+1
-      call wrf_message (  msg)
+      call mdl_message (  msg)
       return
     endif
     do j=1,NDim
@@ -2974,24 +2974,24 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
       call netcdf_err(stat,Status)
       if(Status /= WRF_NO_ERR) then
         write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
       if(Length(j) > StoredLen(j)) then
         Status = WRF_WARN_READ_PAST_EOF
         write(msg,*) 'Warning READ PAST EOF in ext_ncd_read_field of ',TRIM(Var),Length(j),'>',StoredLen(j)
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       elseif(Length(j) <= 0) then
         Status = WRF_WARN_ZERO_LENGTH_READ
         write(msg,*) 'Warning ZERO LENGTH READ in ',__FILE__,', line', __LINE__
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       elseif(DomainStart(j) < MemoryStart(j)) then
         Status = WRF_WARN_DIMENSION_ERROR
         write(msg,*) 'Warning dim ',j,' DomainStart (',DomainStart(j), &
                      ') < MemoryStart (',MemoryStart(j),') in ',__FILE__,', line', __LINE__
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
 !        return
       endif
     enddo
@@ -3008,14 +3008,14 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
     if(stat/= 0) then
       Status = WRF_ERR_FATAL_ALLOCATION_ERROR
       write(msg,*) 'Fatal ALLOCATION ERROR in ',__FILE__,', line', __LINE__
-      call wrf_message (  msg)
+      call mdl_message (  msg)
       return
     endif
     call FieldIO('read',DataHandle,DateStr,Length,MemoryOrder, &
                   FieldType,NCID,VarID,XField,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     call Transpose('read',MemoryOrder,di, Field,l1,l2,m1,m2,n1,n2 &
@@ -3025,20 +3025,20 @@ subroutine ext_ncd_read_field(DataHandle,DateStr,Var,Field,FieldType,Comm,  &
     if(stat/= 0) then
       Status = WRF_ERR_FATAL_DEALLOCATION_ERR
       write(msg,*) 'Fatal DEALLOCATION ERROR in ',__FILE__,', line', __LINE__
-      call wrf_message (  msg)
+      call mdl_message (  msg)
       return
     endif
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  msg)
+    call mdl_message (  msg)
   endif
   DH%first_operation  = .FALSE.
   return
 end subroutine ext_ncd_read_field
 
 subroutine ext_ncd_inquire_opened( DataHandle, FileName , FileStatus, Status )
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -3065,7 +3065,7 @@ subroutine ext_ncd_inquire_opened( DataHandle, FileName , FileStatus, Status )
 end subroutine ext_ncd_inquire_opened
 
 subroutine ext_ncd_inquire_filename( Datahandle, FileName,  FileStatus, Status )
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -3078,7 +3078,7 @@ subroutine ext_ncd_inquire_filename( Datahandle, FileName,  FileStatus, Status )
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   FileName = trim(DH%FileName)
@@ -3088,7 +3088,7 @@ subroutine ext_ncd_inquire_filename( Datahandle, FileName,  FileStatus, Status )
 end subroutine ext_ncd_inquire_filename
 
 subroutine ext_ncd_set_time(DataHandle, DateStr, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -3101,27 +3101,27 @@ subroutine ext_ncd_set_time(DataHandle, DateStr, Status)
   call DateCheck(DateStr,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning DATE STRING ERROR in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_FILE_NOT_COMMITTED
     write(msg,*) 'Warning FILE NOT COMMITTED in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     Status = WRF_WARN_READ_WONLY_FILE
     write(msg,*) 'Warning READ WRITE ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
     do i=1,MaxTimes
       if(DH%Times(i)==DateStr) then
@@ -3138,13 +3138,13 @@ subroutine ext_ncd_set_time(DataHandle, DateStr, Status)
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  msg)
+    call mdl_message (  msg)
   endif
   return
 end subroutine ext_ncd_set_time
 
 subroutine ext_ncd_get_next_time(DataHandle, DateStr, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -3156,21 +3156,21 @@ subroutine ext_ncd_get_next_time(DataHandle, DateStr, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_DRYRUN_READ
     write(msg,*) 'Warning DRYRUN READ in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     Status = WRF_WARN_READ_WONLY_FILE
     write(msg,*) 'Warning READ WRITE ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ .OR. DH%FileStatus == WRF_FILE_OPENED_FOR_UPDATE ) then
     if(DH%CurrentTime >= DH%NumberTimes) then
       Status = WRF_WARN_TIME_EOF
@@ -3183,15 +3183,15 @@ subroutine ext_ncd_get_next_time(DataHandle, DateStr, Status)
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'DH%FileStatus ',DH%FileStatus
-    call wrf_message (  msg)
+    call mdl_message (  msg)
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  msg)
+    call mdl_message (  msg)
   endif
   return
 end subroutine ext_ncd_get_next_time
 
 subroutine ext_ncd_get_previous_time(DataHandle, DateStr, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -3203,21 +3203,21 @@ subroutine ext_ncd_get_previous_time(DataHandle, DateStr, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_DRYRUN_READ
     write(msg,*) 'Warning DRYRUN READ in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     Status = WRF_WARN_READ_WONLY_FILE
     write(msg,*) 'Warning READ WRITE ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ) then
     if(DH%CurrentTime.GT.0) then
       DH%CurrentTime     = DH%CurrentTime -1
@@ -3228,13 +3228,13 @@ subroutine ext_ncd_get_previous_time(DataHandle, DateStr, Status)
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  msg)
+    call mdl_message (  msg)
   endif
   return
 end subroutine ext_ncd_get_previous_time
 
 subroutine ext_ncd_get_next_var(DataHandle, VarName, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'wrf_status_codes.h'
@@ -3249,21 +3249,21 @@ subroutine ext_ncd_get_next_var(DataHandle, VarName, Status)
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_DRYRUN_READ
     write(msg,*) 'Warning DRYRUN READ in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     Status = WRF_WARN_READ_WONLY_FILE
     write(msg,*) 'Warning READ WRITE ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ .OR. DH%FileStatus == WRF_FILE_OPENED_FOR_UPDATE) then
 
     DH%CurrentVariable = DH%CurrentVariable +1
@@ -3276,13 +3276,13 @@ subroutine ext_ncd_get_next_var(DataHandle, VarName, Status)
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  msg)
+    call mdl_message (  msg)
   endif
   return
 end subroutine ext_ncd_get_next_var
 
 subroutine ext_ncd_end_of_frame(DataHandle, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'netcdf.inc'
@@ -3298,7 +3298,7 @@ end subroutine ext_ncd_end_of_frame
 ! NOTE:  For scalar variables NDim is set to zero and DomainStart and 
 ! NOTE:  DomainEnd are left unmodified.  
 subroutine ext_ncd_get_var_info(DataHandle,Name,NDim,MemoryOrder,Stagger,DomainStart,DomainEnd,WrfType,Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'netcdf.inc'
@@ -3321,87 +3321,87 @@ subroutine ext_ncd_get_var_info(DataHandle,Name,NDim,MemoryOrder,Stagger,DomainS
   call GetDH(DataHandle,DH,Status)
   if(Status /= WRF_NO_ERR) then
     write(msg,*) 'Warning Status = ',Status,' in ',__FILE__,', line', __LINE__
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   endif
   if(DH%FileStatus == WRF_FILE_NOT_OPENED) then
     Status = WRF_WARN_FILE_NOT_OPENED
     write(msg,*) 'Warning FILE NOT OPENED in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   elseif(DH%FileStatus == WRF_FILE_OPENED_NOT_COMMITTED) then
     Status = WRF_WARN_DRYRUN_READ
     write(msg,*) 'Warning DRYRUN READ in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_WRITE) then
     Status = WRF_WARN_READ_WONLY_FILE
     write(msg,*) 'Warning READ WRITE ONLY FILE in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  TRIM(msg))
+    call mdl_message (  TRIM(msg))
     return
   elseif(DH%FileStatus == WRF_FILE_OPENED_FOR_READ .OR. DH%FileStatus == WRF_FILE_OPENED_FOR_UPDATE) then
     stat = NF_INQ_VARID(DH%NCID,Name,VarID)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     stat = NF_INQ_VARTYPE(DH%NCID,VarID,XType)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     stat = NF_GET_ATT_INT(DH%NCID,VarID,'FieldType',WrfType)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     select case (XType)
       case (NF_BYTE)
         Status = WRF_WARN_BAD_DATA_TYPE
         write(msg,*) 'Warning BYTE IS BAD DATA TYPE in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       case (NF_CHAR)
         Status = WRF_WARN_BAD_DATA_TYPE
         write(msg,*) 'Warning CHAR IS BAD DATA TYPE in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       case (NF_SHORT)
         Status = WRF_WARN_BAD_DATA_TYPE
         write(msg,*) 'Warning SHORT IS BAD DATA TYPE in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       case (NF_INT)
         if(WrfType /= WRF_INTEGER .and. WrfType /= WRF_LOGICAL) then
           Status = WRF_WARN_BAD_DATA_TYPE
           write(msg,*) 'Warning BAD DATA TYPE in ',__FILE__,', line', __LINE__ 
-          call wrf_message (  TRIM(msg))
+          call mdl_message (  TRIM(msg))
           return
         endif
       case (NF_FLOAT)
         if(WrfType /= WRF_REAL) then
           Status = WRF_WARN_BAD_DATA_TYPE
           write(msg,*) 'Warning BAD DATA TYPE in ',__FILE__,', line', __LINE__ 
-          call wrf_message (  TRIM(msg))
+          call mdl_message (  TRIM(msg))
           return
         endif
       case (NF_DOUBLE)
         if(WrfType /= WRF_DOUBLE) then
           Status = WRF_WARN_BAD_DATA_TYPE
           write(msg,*) 'Warning BAD DATA TYPE in ',__FILE__,', line', __LINE__ 
-          call wrf_message (  TRIM(msg))
+          call mdl_message (  TRIM(msg))
           return
         endif
       case default
         Status = WRF_WARN_DATA_TYPE_NOT_FOUND
         write(msg,*) 'Warning DATA TYPE NOT FOUND in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
     end select
 
@@ -3409,20 +3409,20 @@ subroutine ext_ncd_get_var_info(DataHandle,Name,NDim,MemoryOrder,Stagger,DomainS
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     call GetDim(MemoryOrder,NDim,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'Warning BAD MEMORY ORDER ',TRIM(MemoryOrder),' in ',__FILE__,', line', __LINE__
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     stat = NF_INQ_VARDIMID(DH%NCID,VarID,VDimIDs)
     call netcdf_err(stat,Status)
     if(Status /= WRF_NO_ERR) then
       write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-      call wrf_message (  TRIM(msg))
+      call mdl_message (  TRIM(msg))
       return
     endif
     do j = 1, NDim
@@ -3431,20 +3431,20 @@ subroutine ext_ncd_get_var_info(DataHandle,Name,NDim,MemoryOrder,Stagger,DomainS
       call netcdf_err(stat,Status)
       if(Status /= WRF_NO_ERR) then
         write(msg,*) 'NetCDF error in ',__FILE__,', line', __LINE__ 
-        call wrf_message (  TRIM(msg))
+        call mdl_message (  TRIM(msg))
         return
       endif
     enddo
   else
     Status = WRF_ERR_FATAL_BAD_FILE_STATUS
     write(msg,*) 'Fatal error BAD FILE STATUS in ',__FILE__,', line', __LINE__ 
-    call wrf_message (  msg)
+    call mdl_message (  msg)
   endif
   return
 end subroutine ext_ncd_get_var_info
 
 subroutine ext_ncd_warning_str( Code, ReturnString, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'netcdf.inc'
@@ -3639,7 +3639,7 @@ end subroutine ext_ncd_warning_str
 !returns message string for all WRF and netCDF warning/error status codes
 !Other i/o packages must  provide their own routines to return their own status messages
 subroutine ext_ncd_error_str( Code, ReturnString, Status)
-  use wrf_data
+  use wrf_data; use module_message
   use ext_ncd_support_routines
   implicit none
   include 'netcdf.inc'
