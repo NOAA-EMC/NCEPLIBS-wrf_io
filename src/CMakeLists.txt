@@ -21,44 +21,39 @@ if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_V
 endif()
 
 set(fortran_src
-  wrf_io.F90
   field_routines.F90
-  ext_ncd_get_dom_ti.code
-  ext_ncd_get_var_td.code
-  ext_ncd_get_var_ti.code
-  ext_ncd_put_dom_ti.code
-  ext_ncd_put_var_td.code
-  ext_ncd_put_var_ti.code
-  transpose.code)
+  io_int_stubs.f90
+  module_driver_constants.F90
+  module_machine.F90
+  wrf_io.f90)
 
-set(lib_name ${PROJECT_NAME})
+set(c_src
+  pack_utils.c)
+
 set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include)
 
-add_library(${lib_name} STATIC ${fortran_src})
+add_library(wrf_io STATIC ${fortran_src} ${c_src})
+set_target_properties(wrf_io PROPERTIES Fortran_MODULE_DIRECTORY ${module_dir})
 
-set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY
-                                             ${module_dir})
-set_property(TARGET ${lib_name} PROPERTY Fortran_FORMAT FREE)
+target_compile_definitions(wrf_io PUBLIC "${definitions}")
 
-target_compile_definitions(${lib_name} PUBLIC "${definitions}")
-
-target_include_directories(${lib_name} PUBLIC
+target_include_directories(wrf_io PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
-target_include_directories(${lib_name} INTERFACE
+target_include_directories(wrf_io INTERFACE
   $<BUILD_INTERFACE:${module_dir}>
   $<INSTALL_INTERFACE:include>)
 
-target_link_libraries(${lib_name} PUBLIC NetCDF::NetCDF_Fortran)
+target_link_libraries(wrf_io PUBLIC NetCDF::NetCDF_Fortran)
 
 if(OpenMP_Fortran_FOUND)
-  target_link_libraries(${lib_name} PUBLIC OpenMP::OpenMP_Fortran)
+  target_link_libraries(wrf_io PUBLIC OpenMP::OpenMP_Fortran)
 endif()
 
 install(DIRECTORY ${module_dir} DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 install(
-  TARGETS ${lib_name}
+  TARGETS wrf_io
   EXPORT ${PROJECT_NAME}Exports
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
