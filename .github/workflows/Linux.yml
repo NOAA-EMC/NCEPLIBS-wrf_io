@@ -14,9 +14,9 @@ on:
 jobs:
   Linux:
     runs-on: ubuntu-latest
-      env: 
-        FC: gfortran-9
-        CC: gcc-9
+    env: 
+      FC: gfortran-9
+      CC: gcc-9
     steps:
 
     - name: Installs
