@@ -1,13 +1,26 @@
-name: build
-on: [push, pull_request]
+name: developer
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
 
 jobs:
-  build:
+  developer:
     runs-on: ubuntu-latest
+    env: 
+      FC: gfortran-9
+      CC: gcc-9
     steps:
 
     - name: checkout-wrf_io
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with: 
         path: wrf_io
 
@@ -16,14 +29,11 @@ jobs:
         sudo apt-get install doxygen graphviz libnetcdf-dev libnetcdff-dev
 
     - name: build_wrf_io
-      env: 
-        FC: gfortran-9
-        CC: gcc-9
       run: |
         set -x
         cd wrf_io
         mkdir build 
         cd build
-        cmake ..
+        cmake -DENABLE_DOCS=ON -DCMAKE_BUILD_TYPE=Debug ..
         make VERBOSE=1
 

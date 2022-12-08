@@ -1,0 +1,39 @@
+name: Linux
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+      env: 
+        FC: gfortran-9
+        CC: gcc-9
+    steps:
+
+    - name: Installs
+      run: |
+        sudo apt-get install libnetcdf-dev libnetcdff-dev
+
+    - name: checkout-wrf_io
+      uses: actions/checkout@v2
+      with: 
+        path: wrf_io
+
+    - name: build_wrf_io
+      run: |
+        set -x
+        cd wrf_io
+        mkdir build 
+        cd build
+        cmake ..
+        make VERBOSE=1
+

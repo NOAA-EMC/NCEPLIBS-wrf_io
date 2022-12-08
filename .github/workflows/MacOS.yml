@@ -1,0 +1,42 @@
+name: MacOS
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+
+jobs:
+  MacOS:
+    runs-on: macos-latest
+    env:
+      FC: gfortran-10
+      CC: gcc-10
+      
+    steps:
+
+    - name: Installs
+      run: |
+        brew update
+        brew install mpich libnetcdf-dev libnetcdff-dev
+        sudo ln -sf /usr/local/bin/gfortran-10 /usr/local/bin/gfortran
+
+    - name: checkout-wrf_io
+      uses: actions/checkout@v3
+      with: 
+        path: wrf_io
+
+    - name: build_wrf_io
+      run: |
+        set -x
+        cd wrf_io
+        mkdir build 
+        cd build
+        cmake ..
+        make VERBOSE=1
+
