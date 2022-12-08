@@ -23,7 +23,7 @@ jobs:
     - name: Installs
       run: |
         brew update
-        brew install mpich netcdf
+        brew install mpich netcdf netcdff
         sudo ln -sf /usr/local/bin/gfortran-10 /usr/local/bin/gfortran
 
     - name: checkout-wrf_io
