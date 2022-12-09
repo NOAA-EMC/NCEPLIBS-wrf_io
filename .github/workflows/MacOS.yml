@@ -27,7 +27,7 @@ jobs:
         sudo ln -sf /usr/local/bin/gfortran-10 /usr/local/bin/gfortran
 
     - name: checkout-wrf_io
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       with: 
         path: wrf_io
 

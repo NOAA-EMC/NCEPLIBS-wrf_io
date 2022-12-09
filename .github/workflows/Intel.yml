@@ -45,7 +45,7 @@ jobs:
         sudo apt-get install libnetcdf-dev libnetcdff-dev
 
     - name: checkout-wrf_io
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       with: 
         path: wrf_io
 
