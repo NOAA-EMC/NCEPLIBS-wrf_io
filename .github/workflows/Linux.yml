@@ -1,4 +1,4 @@
-name: develop
+name: Linux
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ on:
     - README.md
 
 jobs:
-  develop:
+  Linux:
     runs-on: ubuntu-latest
     steps:
 
@@ -23,7 +23,7 @@ jobs:
 
     - name: Installs
       run: |
-        sudo apt-get install doxygen graphviz libnetcdf-dev libnetcdff-dev
+        sudo apt-get install libnetcdf-dev libnetcdff-dev
 
     - name: build_wrf_io
       env: 
@@ -34,6 +34,6 @@ jobs:
         cd wrf_io
         mkdir build 
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_Fortran_FLAGS="-g -Wall -Werror" ..
+        cmake ..
         make VERBOSE=1
 
