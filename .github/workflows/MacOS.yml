@@ -29,7 +29,7 @@ jobs:
     - name: build_wrf_io
       run: |
         set -x
-        cd wrf_io
+        cd NCEPLIBS-wrf_io
         mkdir build 
         cd build
         cmake ..

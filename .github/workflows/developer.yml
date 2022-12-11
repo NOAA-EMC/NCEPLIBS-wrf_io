@@ -37,14 +37,6 @@ jobs:
         cd build
         cmake -DENABLE_DOCS=On -DCMAKE_BUILD_TYPE=Debug -DCMAKE_Fortran_FLAGS="-g -fprofile-abs-path -fprofile-arcs -ftest-coverage -O0 -Wall -fsanitize=address" ..
         make VERBOSE=1
-        ctest --verbose --output-on-failure --rerun-failed
-        gcovr --root .. -v  --html-details --exclude ../tests --exclude CMakeFiles --print-summary -o test-coverage.html &> /dev/null
 
-    - name: upload-test-coverage
-      uses: actions/upload-artifact@v2
-      with:
-        name: g2-test-coverage
-        path: |
-          g2/build/*.html
-          g2/build/*.css
+
 
