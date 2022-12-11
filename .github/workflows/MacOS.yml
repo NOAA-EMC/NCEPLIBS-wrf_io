@@ -19,6 +19,9 @@ jobs:
       CC: gcc
 
     steps:
+
+    - uses: actions/checkout@v2
+    
     - name: install-dependencies
       run: |
         find /Library/Frameworks/ -name "png*"
@@ -29,6 +32,7 @@ jobs:
     - name: build_wrf_io
       run: |
         set -x
+        ls -l
         cd NCEPLIBS-wrf_io
         mkdir build 
         cd build
