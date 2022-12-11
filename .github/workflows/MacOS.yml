@@ -20,7 +20,10 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
+    - name: checkout-wrf_io
+      uses: actions/checkout@v2
+      with: 
+        path: wrf_io
     
     - name: install-dependencies
       run: |
@@ -32,8 +35,7 @@ jobs:
     - name: build_wrf_io
       run: |
         set -x
-        ls -l
-        cd NCEPLIBS-wrf_io
+        cd wrf_io
         mkdir build 
         cd build
         cmake ..
