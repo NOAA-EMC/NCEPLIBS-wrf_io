@@ -14,6 +14,9 @@ on:
 jobs:
   Linux:
     runs-on: ubuntu-latest
+    env: 
+      FC: gfortran-9
+      CC: gcc-9
     steps:
 
     - name: checkout-wrf_io
@@ -26,9 +29,6 @@ jobs:
         sudo apt-get install libnetcdf-dev libnetcdff-dev
 
     - name: build_wrf_io
-      env: 
-        FC: gfortran-9
-        CC: gcc-9
       run: |
         set -x
         cd wrf_io
