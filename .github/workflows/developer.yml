@@ -1,4 +1,4 @@
-name: develop
+name: developer
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ on:
     - README.md
 
 jobs:
-  develop:
+  developer:
     runs-on: ubuntu-latest
     env: 
       FC: gfortran-9
