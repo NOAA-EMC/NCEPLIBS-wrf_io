@@ -1,9 +1,22 @@
-name: build
-on: [push, pull_request]
+name: Linux
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
 
 jobs:
-  build:
+  Linux:
     runs-on: ubuntu-latest
+    env: 
+      FC: gfortran-9
+      CC: gcc-9
     steps:
 
     - name: checkout-wrf_io
@@ -13,12 +26,9 @@ jobs:
 
     - name: Installs
       run: |
-        sudo apt-get install doxygen graphviz libnetcdf-dev libnetcdff-dev
+        sudo apt-get install libnetcdf-dev libnetcdff-dev
 
     - name: build_wrf_io
-      env: 
-        FC: gfortran-9
-        CC: gcc-9
       run: |
         set -x
         cd wrf_io

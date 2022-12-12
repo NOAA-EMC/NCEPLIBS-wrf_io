@@ -1,0 +1,42 @@
+name: developer
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+
+jobs:
+  developer:
+    runs-on: ubuntu-latest
+    env: 
+      FC: gfortran-9
+      CC: gcc-9
+        
+    steps:
+
+    - name: checkout-wrf_io
+      uses: actions/checkout@v2
+      with: 
+        path: wrf_io
+
+    - name: Installs
+      run: |
+        sudo apt-get install doxygen graphviz libnetcdf-dev libnetcdff-dev
+
+    - name: build_wrf_io
+      run: |
+        set -x
+        cd wrf_io
+        mkdir build 
+        cd build
+        cmake -DENABLE_DOCS=On -DCMAKE_BUILD_TYPE=Debug -DCMAKE_Fortran_FLAGS="-g -fprofile-abs-path -fprofile-arcs -ftest-coverage -O0 -Wall -fsanitize=address" ..
+        make VERBOSE=1
+
+
+
