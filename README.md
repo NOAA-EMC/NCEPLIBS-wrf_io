@@ -1,3 +1,5 @@
+![Status](https://github.com/NOAA-EMC/NCEPLIBS-wrf_io/workflows/developer/badge.svg)
+
 # NCEPLIBS-wrf_io
 
 This is a lightweight WRF-IO API library for Unified Post Processor
