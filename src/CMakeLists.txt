@@ -6,7 +6,7 @@ if(NetCDF_VERSION VERSION_GREATER_EQUAL 4)
     USE_NETCDF4_FEATURES)
 endif()
 
-if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
+if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel|IntelLLVM)$")
   set(CMAKE_Fortran_FLAGS "-fpp -g -traceback -fp-model source -ftz -assume byterecl -convert big_endian -heap-arrays -nostdinc ${CMAKE_Fortran_FLAGS}")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3 -w")
   set(CMAKE_Fortran_FLAGS_DEBUG "-O0")
