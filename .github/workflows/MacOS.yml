@@ -12,12 +12,12 @@ jobs:
     runs-on: macos-latest
     env:
       FC: gfortran-12
-      CC: gcc
+      CC: gcc-12
 
     steps:
 
     - name: checkout-wrf_io
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: wrf_io
     
@@ -30,9 +30,6 @@ jobs:
 
     - name: build_wrf_io
       run: |
-        set -x
-        cd wrf_io
-        mkdir build 
-        cd build
-        cmake ..
-        make VERBOSE=1
+        cmake -S wrf_io -B wrf_io/build
+        cmake --build wrf_io/build --verbose
+

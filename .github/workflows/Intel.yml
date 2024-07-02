@@ -7,42 +7,29 @@ on:
     branches:
     - develop
 
-# Use custom shell with -l so .bash_profile is sourced which loads intel/oneapi/setvars.sh
-# without having to do it in manually every step
-defaults:
-  run:
-    shell: bash -leo pipefail {0}
-
 jobs:
   Intel:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        compilers: ["CC=icc FC=ifort", "CC=icx FC=ifx"]
+        compilers: ["oneapi", "classic"]
       
     steps:
 
+    - name: "Install Intel"
+      uses: NOAA-EMC/ci-install-intel-toolkit@develop
+      with:
+        compiler-setup: ${{ matrix.compilers }}
+
+    - name: "Install NetCDF"
+      run: sudo apt-get install libnetcdf-dev libnetcdff-dev
+
     - name: checkout-wrf_io
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: wrf_io
 
-      # See https://software.intel.com/content/www/us/en/develop/articles/oneapi-repo-instructions.html
-    - name: install-dependencies
-      run: |
-        wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-        sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-        rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-        echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-        sudo apt-get update
-        sudo apt-get install intel-oneapi-openmp intel-oneapi-compiler-fortran intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic
-        sudo apt-get install libnetcdf-dev libnetcdff-dev
-        echo "source /opt/intel/oneapi/setvars.sh" >> ~/.bash_profile
-
     - name: build_wrf_io
       run: |
-        cd wrf_io
-        mkdir build 
-        cd build
-        cmake ..
-        make VERBOSE=1
+        cmake -S wrf_io -B wrf_io/build
+        cmake --build wrf_io/build --verbose
