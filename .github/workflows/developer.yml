@@ -11,8 +11,8 @@ jobs:
   developer:
     runs-on: ubuntu-latest
     env: 
-      FC: gfortran-11
-      CC: gcc-11
+      FC: gfortran
+      CC: gcc
         
     steps:
 

@@ -28,13 +28,13 @@ This package requires the netCDF C library.
 
 ## Build instructions
 
-load Intel or GNU compiler
-load NetCDF (3.x or 4.x)
-
-```
-prefix=/path/to/wrfio
-mkdir -p build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=<prefix> ..
+```console
+# Load NetCDF into environment; cmake/FindNetcdf.cmake uses `nc-config` to link to NetCDF libraries
+git clone https://github.com/NOAA-EMC/NCEPLIBS-wrf_io # or download a release from https://github.com/NOAA-EMC/NCEPLIBS-wrf_io/releases
+cmake -DCMAKE_INSTALL_PREFIX=/path/to/install -S NCEPLIBS-wrf_io -B NCEPLIBS-wrf_io/build # <add'l CMake options>
+cmake --build NCEPLIBS-wrf_io/build --parallel 4
+ctest --test-dir NCEPLIBS-wrf_io/build --parallel 4 # <add'l CTest options>
+cmake --install NCEPLIBS-wrf_io/build
 ```
 
 The libraries and .mod files will be installed in `<prefix>`
