@@ -9,10 +9,10 @@ on:
 
 jobs:
   Linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env: 
-      FC: gfortran-11
-      CC: gcc-11
+      FC: gfortran
+      CC: gcc
     steps:
 
     - name: checkout-wrf_io
