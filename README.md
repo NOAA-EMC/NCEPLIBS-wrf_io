@@ -45,6 +45,8 @@ find_package(wrfio)
 cmake -DCMAKE_PREFIX_PATH=<prefix> ..
 ```
 
+NCEPLIBS-wrf_io is also available through [Spack](https://spack.io) as '[wrf-io](https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/wrf-io)'.
+
 ## Disclaimer
 
 The United States Department of Commerce (DOC) GitHub project code is
