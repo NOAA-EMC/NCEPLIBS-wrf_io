@@ -33,7 +33,6 @@ This package requires the netCDF C library.
 git clone https://github.com/NOAA-EMC/NCEPLIBS-wrf_io # or download a release from https://github.com/NOAA-EMC/NCEPLIBS-wrf_io/releases
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/install -S NCEPLIBS-wrf_io -B NCEPLIBS-wrf_io/build # <add'l CMake options>
 cmake --build NCEPLIBS-wrf_io/build --parallel 4
-ctest --test-dir NCEPLIBS-wrf_io/build --parallel 4 # <add'l CTest options>
 cmake --install NCEPLIBS-wrf_io/build
 ```
 
